@@ -1,6 +1,13 @@
 import {tipoVeiculos} from "../models/veiculo_model.js";
 import { Sequelize } from "sequelize"
 const Op = Sequelize.Op;
+// require("dotenv-safe").config()
+// import dotenv from "dotenv-safe"
+// dotenv.config()
+
+// import jwt from "jsonwebtoken"
+
+
 
 // Busca todos os tipoVeiculos registrados na tabela por meio do método findAll
 export const getTipoVeiculo = async (req, res) => {

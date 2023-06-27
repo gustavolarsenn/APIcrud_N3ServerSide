@@ -1,6 +1,10 @@
 import {Proprietario} from "../models/veiculo_model.js";
 import { Sequelize } from "sequelize"
 const Op = Sequelize.Op;
+// require("dotenv-safe").config()
+// import dotenv from "dotenv-safe"
+// dotenv.config()
+// import jwt from "jsonwebtoken"
 
 // Busca todos os Proprietario registrados na tabela por meio do método findAll
 export const getProprietario = async (req, res) => {
