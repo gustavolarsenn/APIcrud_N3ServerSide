@@ -28,7 +28,7 @@ CREATE TABLE `proprietario` (
   `nome` varchar(100) DEFAULT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`cod_proprietario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `proprietario` (
 
 LOCK TABLES `proprietario` WRITE;
 /*!40000 ALTER TABLE `proprietario` DISABLE KEYS */;
-INSERT INTO `proprietario` VALUES (1,NULL,NULL,NULL),(2,NULL,NULL,NULL),(3,NULL,NULL,NULL),(4,'00000000014','Luis Felipe','99999-6969');
+INSERT INTO `proprietario` VALUES (1,'00000000014','Luis Felipe','99999-4040'),(2,'00000000050','Gustavo Larsen','8888-4040'),(3,'00000000080','Guilherme Bessa','9966-4040'),(4,'00000000041','Cleber Machado','5858-4040'),(5,'00000000400','Galvao Bueno','2020-4040');
 /*!40000 ALTER TABLE `proprietario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +52,7 @@ CREATE TABLE `tipoveiculo` (
   `cod_tipo` bigint(20) NOT NULL AUTO_INCREMENT,
   `descricao_tipo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`cod_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `tipoveiculo` (
 
 LOCK TABLES `tipoveiculo` WRITE;
 /*!40000 ALTER TABLE `tipoveiculo` DISABLE KEYS */;
-INSERT INTO `tipoveiculo` VALUES (1,NULL),(2,NULL),(3,NULL),(4,'Popular'),(5,'Luxo'),(6,'Super Luxo');
+INSERT INTO `tipoveiculo` VALUES (1,'Luxo'),(2,'Popular'),(3,'Super Luxo');
 /*!40000 ALTER TABLE `tipoveiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `veiculo` (
   KEY `tipo` (`tipo`),
   CONSTRAINT `veiculo_ibfk_1` FOREIGN KEY (`proprietario`) REFERENCES `proprietario` (`cod_proprietario`),
   CONSTRAINT `veiculo_ibfk_2` FOREIGN KEY (`tipo`) REFERENCES `tipoveiculo` (`cod_tipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `veiculo` (
 
 LOCK TABLES `veiculo` WRITE;
 /*!40000 ALTER TABLE `veiculo` DISABLE KEYS */;
-INSERT INTO `veiculo` VALUES (1,'000-0000',69000,1,NULL),(2,'000-0000',69000,1,NULL),(3,'000-0000',69000,1,NULL),(4,'000-0000',69000,1,5);
+INSERT INTO `veiculo` VALUES (1,'111-8888',70000,1,1),(2,'333-8888',50000,2,1),(3,'444-8888',90000,3,1),(4,'555-8888',120000,4,3),(5,'666-8888',1200000,5,3);
 /*!40000 ALTER TABLE `veiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -105,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-19 22:20:50
+-- Dump completed on 2023-07-02 23:05:18

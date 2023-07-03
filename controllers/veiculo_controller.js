@@ -1,4 +1,4 @@
-import {Veiculo} from "../models/veiculo_model.js";
+import {Veiculo, Proprietario, tipoVeiculos} from "../models/veiculo_model.js";
 import { Sequelize } from "sequelize"
 const Op = Sequelize.Op;
 
@@ -34,9 +34,9 @@ export const createVeiculo = async (req, res) => {
     try {
         let veiculo = req.body
 
-        if (veiculo.preco_veiculo < 50000) veiculo.tipo = 4 
-        else if (veiculo.preco_veiculo < 100000) veiculo.tipo = 5 
-        else if (veiculo.preco_veiculo > 100000) veiculo.tipo = 6 
+        if (veiculo.preco_veiculo < 50000) veiculo.tipo = 2
+        else if (veiculo.preco_veiculo < 100000) veiculo.tipo = 1 
+        else if (veiculo.preco_veiculo > 100000) veiculo.tipo = 3 
 
         await Veiculo.create(veiculo)
         res.json({
@@ -66,7 +66,13 @@ export const deleteVeiculo = async (req, res) => {
 // Atualiza dados 
 export const updateVeiculo = async (req, res) => {
     try {
-        await Veiculo.update(req.body, {
+        let veiculo = req.body
+
+        if (veiculo.preco_veiculo < 50000) veiculo.tipo = 2
+        else if (veiculo.preco_veiculo < 100000) veiculo.tipo = 1 
+        else if (veiculo.preco_veiculo > 100000) veiculo.tipo = 3 
+        
+        await Veiculo.update(veiculo, {
             where: {
                 cod_veiculo: req.params.cod_veiculo
             }
@@ -81,18 +87,47 @@ export const updateVeiculo = async (req, res) => {
 
 export const getVeiculoByProprietario = async (req, res) => {
     try {
-        const proprietario = await req.params.proprietario
+        const proprietario = await req.params.nome
         const veiculo_name = await Veiculo.findAll({
-            where: {
-                proprietario: {
-                    [Op.like]: `%${proprietario}%`
+            include: [{
+                model: Proprietario,
+                as: 'tb_proprietario',
+                attributes: ['nome'],
+                where: {
+                    nome: {
+                        [Op.like]:  `%${proprietario}%`
+                    },
                 }
-            }
-          }
+            },
+        ]
+        }
     )
     res.send(veiculo_name)
     } catch (err) {
-        console.log("Não foi possível resgatar veiculo pelo nome!", err)
+        console.log("Não foi possível resgatar veiculo pelo proprietário!", err)
+    }
+}
+
+export const getVeiculoByTipo = async (req, res) => {
+    try {
+        const tipoVeiculo = await req.params.descricao_tipo
+        const veiculo_name = await Veiculo.findAll({
+            include: [{
+                model: tipoVeiculos,
+                as: 'tipoVeiculo',
+                attributes: ['descricao_tipo'],
+                where: {
+                    descricao_tipo: {
+                        [Op.like]:  `%${tipoVeiculo}%`
+                    },
+                }
+            },
+        ]
+        }
+    )
+    res.send(veiculo_name)
+    } catch (err) {
+        console.log("Não foi possível resgatar veiculo pelo tipo!", err)
     }
 }
 

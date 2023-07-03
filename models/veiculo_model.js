@@ -59,9 +59,10 @@ export const tipoVeiculos = db.define("tipoVeiculo", {
 })
 
 // Configurando as associações
-Veiculo.belongsTo(Proprietario, { foreignKey: 'proprietario', as:'fk_proprietario'});
-Veiculo.belongsTo(tipoVeiculos, { foreignKey: 'tipo', as:'fk_tipo'});
-
+Veiculo.belongsTo(Proprietario, { foreignKey: 'proprietario', as:'tb_proprietario'});
+Proprietario.hasMany(Veiculo, { foreignKey: 'proprietario'});
+Veiculo.belongsTo(tipoVeiculos, { foreignKey: 'tipo'});
+tipoVeiculos.hasMany(Veiculo, { foreignKey: 'tipo'});
 // Sincronizando os modelos com o banco de dados
 db.sync({ force: false })
   .then(() => {

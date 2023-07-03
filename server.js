@@ -2,12 +2,10 @@
 import express from "express"
 import cors from "cors"
 import db from "./config/database.js"
-// import Router from "./routers/veiculo_routes.js"
+import Router from "./routers/veiculo_routes.js"
 import bodyParser from "body-parser"
 import dotenv from "dotenv-safe"
 dotenv.config()
-
-import http from "http"
 
 import jwt from "jsonwebtoken"
 
@@ -53,5 +51,5 @@ try{
     console.error("Conexão com o MySQL não estabelecida!")
 }
 
-// server.use(Router)
+server.use(Router)
 server.listen(5000, () => console.log("Server executando em http://localhost:5000!"))
