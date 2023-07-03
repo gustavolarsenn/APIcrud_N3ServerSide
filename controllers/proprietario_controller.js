@@ -1,15 +1,11 @@
 import {Proprietario} from "../models/veiculo_model.js";
 import { Sequelize } from "sequelize"
 const Op = Sequelize.Op;
-// require("dotenv-safe").config()
-// import dotenv from "dotenv-safe"
-// dotenv.config()
-// import jwt from "jsonwebtoken"
 
 // Busca todos os Proprietario registrados na tabela por meio do método findAll
 export const getProprietario = async (req, res) => {
     try{
-        const proprietario = await Proprietario.findAll() // método findAll "substitui" o SELECT * FROM tabela
+        const proprietario = await Proprietario.findAll()
         res.send(proprietario)
     } catch (err) {
         console.log("Erro ao acessar a tabela proprietario!", err)
